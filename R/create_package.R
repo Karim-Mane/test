@@ -36,6 +36,7 @@ createPackage = function(package.name, where, organisation.name=NULL){
 #createPackage(package.name, where, organisation.name)
 
 #' function to set up the R package components (licence, README, pkgdown website)
+#' @export
 setUpPackageComponents = function(){
     cat("\nSetting a licence\n")
     usethis::use_mit_license()
@@ -49,12 +50,21 @@ setUpPackageComponents = function(){
 }
 
 #' function to build and update Readme.md file
+#' @export
 updateReadMe = function(){
     devtools::build_readme()
 }
 
 #' function to build the pkgdown website
+#' @export
 buildPkgdownWebsite = function(){
     pkgdown::build_site()
+}
+
+#' function to add a list of packages dependencies
+#' @param dependencies a vector of packages on which the package to be built depends on
+#' @export
+addPkgDepencies = function(dependencies="data.table"){
+    usethis::use_package(dependencies)
 }
 
