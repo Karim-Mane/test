@@ -72,3 +72,9 @@ addPkgDepencies = function(dependencies="data.table"){
     usethis::use_package(dependencies)
 }
 
+#' function to build package documentation
+#' @export
+buildPckDocumentation = function(){
+    devtools::document()
+}
+
