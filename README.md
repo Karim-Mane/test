@@ -4,6 +4,9 @@
 # test
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/Karim-Mane/test/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Karim-Mane/test?branch=master)
 <!-- badges: end -->
 
 The goal of test is to …
