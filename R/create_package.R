@@ -8,7 +8,7 @@ suppressPackageStartupMessages(require("covr"))
 #' @param package.name the name of the package that you need to create
 #' @param where the path to the folder where you want to create the package
 #' @param organisation.name the name of the organisation in which the package should be created. For Epiverse TRACE, this is "epiverse-trace"
-#' @example createPackage(package.name="mypackage", where="/Users/km28/Documents/Karim/Karim/LSHTM/Codes")
+#' @examples createPackage(package.name="mypackage", where="/Users/km28/Documents/Karim/Karim/LSHTM/Codes", organisation.name="Karim-Mane")
 #' @export
 createPackage = function(package.name, where, organisation.name=NULL){
     setwd(where)
@@ -36,6 +36,7 @@ createPackage = function(package.name, where, organisation.name=NULL){
 #createPackage(package.name, where, organisation.name)
 
 #' function to set up the R package components (licence, README, pkgdown website)
+#' @examples setUpPackageComponents()
 #' @export
 setUpPackageComponents = function(){
     cat("\nSetting a licence\n")
@@ -50,12 +51,14 @@ setUpPackageComponents = function(){
 }
 
 #' function to build and update Readme.md file
+#' @examples updateReadMe()
 #' @export
 updateReadMe = function(){
     devtools::build_readme()
 }
 
 #' function to build the pkgdown website
+#' @examples buildPkgdownWebsite()
 #' @export
 buildPkgdownWebsite = function(){
     pkgdown::build_site()
@@ -63,6 +66,7 @@ buildPkgdownWebsite = function(){
 
 #' function to add a list of packages dependencies
 #' @param dependencies a vector of packages on which the package to be built depends on
+#' @examples addPkgDepencies(dependencies=c("data.table","dplyr"))
 #' @export
 addPkgDepencies = function(dependencies="data.table"){
     usethis::use_package(dependencies)
