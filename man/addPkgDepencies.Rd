@@ -4,7 +4,7 @@
 \alias{addPkgDepencies}
 \title{function to add a list of packages dependencies}
 \usage{
-addPkgDepencies(dependencies = "data.table")
+addPkgDepencies(dependencies = c("devtools", "usethis", "pkgdown", "covr"))
 }
 \arguments{
 \item{dependencies}{a vector of packages on which the package to be built depends on}
@@ -13,5 +13,5 @@ addPkgDepencies(dependencies = "data.table")
 function to add a list of packages dependencies
 }
 \examples{
-addPkgDepencies(dependencies=c("data.table","dplyr"))
+addPkgDepencies(dependencies=c("devtools","usethis","pkgdown","covr"))
 }

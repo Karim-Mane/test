@@ -1,8 +1,5 @@
 
-suppressPackageStartupMessages(require("devtools"))
-suppressPackageStartupMessages(require("usethis"))
-suppressPackageStartupMessages(require("pkgdown"))
-suppressPackageStartupMessages(require("covr"))
+
 
 #' function to a repository and R package
 #' @param package.name the name of the package that you need to create
@@ -32,8 +29,6 @@ createPackage = function(package.name, where, organisation.name=NULL){
     system(sprintf("git push origin master"))
     cat("\nDo not forget to manually fill in the NAMESPACE and DESCRIPTION files\n")
 }
-
-#createPackage(package.name, where, organisation.name)
 
 #' function to set up the R package components (licence, README, pkgdown website)
 #' @examples setUpPackageComponents()
@@ -66,15 +61,17 @@ buildPkgdownWebsite = function(){
 
 #' function to add a list of packages dependencies
 #' @param dependencies a vector of packages on which the package to be built depends on
-#' @examples addPkgDepencies(dependencies=c("data.table","dplyr"))
+#' @examples addPkgDepencies(dependencies=c("devtools","usethis","pkgdown","covr"))
 #' @export
-addPkgDepencies = function(dependencies="data.table"){
-    usethis::use_package(dependencies)
+addPkgDepencies = function(dependencies=c("devtools","usethis","pkgdown","covr")){
+    for(dep in dependencies){
+        usethis::use_package(dep)
+    }
 }
 
 #' function to build package documentation
 #' @export
-buildPckDocumentation = function(){
+buildPkgDocumentation = function(){
     devtools::document()
 }
 

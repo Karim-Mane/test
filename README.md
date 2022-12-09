@@ -9,7 +9,8 @@
 coverage](https://codecov.io/gh/Karim-Mane/test/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Karim-Mane/test?branch=master)
 <!-- badges: end -->
 
-The goal of test is to …
+The goal of test is to provide functions that are useful for the
+creation of an R package.
 
 ## Installation
 
@@ -21,38 +22,91 @@ You can install the development version of test from
 devtools::install_github("Karim-Mane/test")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Loading the package after installation
 
 ``` r
 library(test)
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Create an R project and link it with a remote GitHub account
+
+The **createPackage()** function is used to create an R project and link
+it to a remote GitHub account and perform the first commit to that
+account. The function requires the following parameters:  
+1. `package.name`: the name of the package/project to be created  
+2. `where`: the path to the directory where package will be created  
+3. `organisation.name`: the name of the organisation in which the
+package will be created. For **Epiverse TRACE**, this will be
+`epiverse-trace`. For Karim’s github account, this will be `Karim-Mane`
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+createPackage(package.name="test", 
+              where="/Users/km28/Documents/Karim/Karim/LSHTM/Codes",
+              organisation.name="Karim-Mane")
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+## Set up the package components
 
-You can also embed plots, for example:
+Use the **setUpPackageComponents()** to set up the package components
+i.e. to: \* set up a licence,  
+\* create a Readme file,  
+\* set up unit testing infrastructure,  
+\* set up a pkgdown website,
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+``` r
+setUpPackageComponents()
+```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+## Build and update the Readme.md from the README.Rmd
+
+To build the Readme.md file from the README.Rmd file, use the
+**updateReadMe()**. This function needs to be called after any
+modification of the README.Rmd file.
+
+``` r
+updateReadMe()
+```
+
+## Build the package website
+
+The package website can be built using the **pkgdown** package in R.
+After editing all your functions and documentation files, use the
+**buildPkgdownWebsite()** function to build the website.
+
+``` r
+buildPkgdownWebsite()
+```
+
+## Add list of package dependencies
+
+Once identified, the list of packages on which the current package
+depends on can will be added to the **DESCRIPTION** file using the
+**addPkgDepencies()** function. The function expects the following
+parameters:  
+1. `dependencies`: a vector of packages on which the package to be built
+depends on
+
+``` r
+addPkgDepencies(dependencies=c("devtools","usethis","pkgdown","covr"))
+```
+
+## Build the package documentation
+
+When you are satisfied with the documentation of all the functions, use
+the **buildPkgDocumentation()** to build the documentation files in the
+`man/` folder and update the **NAMESPACE** file.
+
+``` r
+buildPkgDocumentation()
+```
+
+## Commit and push the changes to the remote GitHub account
+
+For any changes/updates made on any of the files of the package use the
+command below to update the remote GitHub account.
+
+``` bash
+git add .
+git commit -a -m "updates"
+git push origin master
+```
